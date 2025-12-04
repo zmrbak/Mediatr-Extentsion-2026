@@ -42,7 +42,18 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="Class Name:" />
-                        <TextBox Style="{StaticResource BaseInputControlStyle}" />
+                        <TextBox Style="{StaticResource BaseInputControlStyle}">
+                            <TextBox.Text>
+                                <Binding
+                                    Mode="TwoWay"
+                                    Path="InputFileName"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="Message Type:" />
@@ -114,35 +125,35 @@
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Mediatr Extentsion 2026;component/Assets/Folder_16x.png" Style="{StaticResource ImageStyle}" />
-                                <TextBlock Text="folder Name" TextAlignment="Center" />
+                                <TextBlock Text="{Binding FolderName}" TextAlignment="Center" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding MessageHandlerNameVisibility}">
                                 <Image
                                     Margin="10,0,0,0"
                                     Source="/Mediatr Extentsion 2026;component/Assets/CSharp.png"
                                     Style="{StaticResource ImageStyle}" />
-                                <TextBlock Text="folder Name" TextAlignment="Center" />
+                                <TextBlock Text="{Binding MessageName}" TextAlignment="Center" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding ResponseViewModelNameVisibility}">
                                 <Image
                                     Margin="10,0,0,0"
                                     Source="/Mediatr Extentsion 2026;component/Assets/CSharp.png"
                                     Style="{StaticResource ImageStyle}" />
-                                <TextBlock Text="folder Name" TextAlignment="Center" />
+                                <TextBlock Text="{Binding ResponseViewModelName}" TextAlignment="Center" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding ValidatorFileVisibility}">
                                 <Image
                                     Margin="10,0,0,0"
                                     Source="/Mediatr Extentsion 2026;component/Assets/CSharp.png"
                                     Style="{StaticResource ImageStyle}" />
-                                <TextBlock Text="folder Name" TextAlignment="Center" />
+                                <TextBlock Text="{Binding ValidatorFileName}" TextAlignment="Center" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding AutomapperFileVisibility}">
                                 <Image
                                     Margin="10,0,0,0"
                                     Source="/Mediatr Extentsion 2026;component/Assets/CSharp.png"
                                     Style="{StaticResource ImageStyle}" />
-                                <TextBlock Text="folder Name" TextAlignment="Center" />
+                                <TextBlock Text="{Binding AutomapperFileName}" TextAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

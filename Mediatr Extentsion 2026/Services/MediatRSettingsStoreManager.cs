@@ -1,6 +1,7 @@
 ﻿using EnvDTE;
 using Mediatr_Extentsion_2026.Models;
 using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,14 @@ namespace Mediatr_Extentsion_2026.Services
 
         public string GetDefaultFileNameByProject(Project project)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var collectionPath = GetOrCreateCollectionByProject(project);
             return store.GetString(collectionPath, MediatRSettingsKey.FileName, DEFAULT_FILE_NAME);
         }
 
         public IEnumerable<string> GetImportsByProject(Project project)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var collectionPath = GetOrCreateCollectionByProject(project);
             var imports = store.GetString(collectionPath, MediatRSettingsKey.Imports, string.Empty);
 
@@ -38,7 +39,7 @@ namespace Mediatr_Extentsion_2026.Services
 
         public IEnumerable<TypeNameModel> GetConstructorParametersByProject(Project project)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var collectionPath = GetOrCreateCollectionByProject(project);
             var constructorParameters = store.GetString(collectionPath, MediatRSettingsKey.ConstructorParemeters, string.Empty);
 
@@ -52,14 +53,14 @@ namespace Mediatr_Extentsion_2026.Services
 
         public bool GetBooleanByProject(Project project, string key, bool defaultValue = false)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var collectionPath = GetOrCreateCollectionByProject(project);
             return store.GetBoolean(collectionPath, key, defaultValue);
         }
 
         public void SetImportsByProject(Project project, IEnumerable<string> imports)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var collectionPath = GetOrCreateCollectionByProject(project);
             var storedValue = string.Join(SEPARATOR, imports);
             store.SetString(collectionPath, MediatRSettingsKey.Imports, storedValue);
@@ -67,7 +68,7 @@ namespace Mediatr_Extentsion_2026.Services
 
         public void SetConstructorParametersByProject(Project project, IEnumerable<TypeNameModel> constructorParameters)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var storedValue = string.Join(SEPARATOR, constructorParameters.Select(x => $"{x.Type} {x.Name}"));
             var collectionPath = GetOrCreateCollectionByProject(project);
             store.SetString(collectionPath, MediatRSettingsKey.ConstructorParemeters, storedValue);
@@ -75,7 +76,7 @@ namespace Mediatr_Extentsion_2026.Services
 
         public void SetBooleanByProject(Project project, string key, bool value)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             var collectionPath = GetOrCreateCollectionByProject(project);
             store.SetBoolean(collectionPath, key, value);
         }
@@ -87,7 +88,7 @@ namespace Mediatr_Extentsion_2026.Services
 
         private string GetOrCreateCollectionByProject(Project project)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             if (null == project) { throw new ArgumentNullException(nameof(project)); }
 
             var safeProjUniqueName = project.UniqueName.Replace('\\', '_');
@@ -100,7 +101,7 @@ namespace Mediatr_Extentsion_2026.Services
 
         public StoredUserSettings GetAllSettingsByProject(Project project)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             return new StoredUserSettings
             {
                 InputFileName = GetDefaultFileNameByProject(project),
@@ -116,7 +117,7 @@ namespace Mediatr_Extentsion_2026.Services
 
         public void SaveUserSettigs(Project project, CreateMessage model)
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            ThreadHelper.ThrowIfNotOnUIThread();
             SetImportsByProject(project, model.Imports);
             SetConstructorParametersByProject(project, model.ConstructorParameters);
 

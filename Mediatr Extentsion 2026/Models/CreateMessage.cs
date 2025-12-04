@@ -1,11 +1,9 @@
-﻿using Microsoft.VisualStudio.Shell;
+﻿using Mediatr_Extentsion_2026.Definitions;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Mediatr_Extentsion_2026.Definitions;
 
 namespace Mediatr_Extentsion_2026.Models
 {
