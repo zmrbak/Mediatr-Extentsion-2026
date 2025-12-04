@@ -98,7 +98,6 @@ namespace Mediatr_Extentsion_2026.Commands
 
             var storedSettings = mediatrSettingsStoreManager.GetAllSettingsByProject(dteWrapper.SelectedProject);
             var messageSettingsWindow = new MediatrMessageSettingsWindow(storedSettings);
-            //var messageSettingsWindow = new MediatrMessageSettingsWindow();
             var windowResult = WindowHelper.ShowModal(messageSettingsWindow);
 
             if (WindowResultSucceeded(windowResult))

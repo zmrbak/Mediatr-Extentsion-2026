@@ -7,7 +7,7 @@
     xmlns:ui="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
     Title="MediatR Message Creation"
     Width="611"
-    Height="416"
+    Height="479"
     Background="White"
     ResizeMode="NoResize"
     TextOptions.TextFormattingMode="Display"
@@ -46,26 +46,68 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="Message Type:" />
-                        <ComboBox Style="{StaticResource BaseInputControlStyle}" />
+                        <ComboBox
+                            ItemsSource="{Binding MessageTypes}"
+                            SelectedItem="{Binding SelectedMessageType}"
+                            Style="{StaticResource BaseInputControlStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="Async/Sync:" />
-                        <ComboBox Style="{StaticResource BaseInputControlStyle}" />
+                        <ComboBox
+                            ItemsSource="{Binding ProcessingTypes}"
+                            SelectedItem="{Binding SelectedProcessingType}"
+                            Style="{StaticResource BaseInputControlStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="Suffix:" />
-                        <ComboBox Style="{StaticResource BaseInputControlStyle}" />
+                        <ComboBox
+                            ItemsSource="{Binding SuffixTypes}"
+                            SelectedItem="{Binding SelectedSuffixType}"
+                            Style="{StaticResource BaseInputControlStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="Response Type:" />
-                        <ComboBox Style="{StaticResource BaseInputControlStyle}" />
+                        <ComboBox
+                            IsEnabled="{Binding IsResponseTypeComboBoxEnabled}"
+                            ItemsSource="{Binding ResponseTypes}"
+                            SelectedItem="{Binding SelectedResponseType, Mode=TwoWay}"
+                            Style="{StaticResource BaseInputControlStyle}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <GroupBox Header="Addtional options">
                         <StackPanel>
-                            <CheckBox Content="Create folder" />
-                            <CheckBox Content="Create validator" />
-                            <CheckBox Content="Create automapper profile" />
-                            <CheckBox Content="Message and Handler in one file" />
+                            <CheckBox Content="Create folder" IsChecked="{Binding ShouldCreateFolder, Mode=TwoWay}" />
+                            <CheckBox Content="Create validator" IsChecked="{Binding ShouldCreateValidationFile, Mode=TwoWay}" />
+                            <CheckBox Content="Create automapper profile" IsChecked="{Binding ShouldCreateAutomapperFile, Mode=TwoWay}" />
+                            <CheckBox Content="Message and Handler in one file" IsChecked="{Binding OneFileStyle, Mode=TwoWay}" />
+                            <CheckBox
+                                Margin="20,0,0,0"
+                                Content="Message and handler in one class"
+                                IsChecked="{Binding OneClassStyle, Mode=TwoWay}"
+                                IsEnabled="{Binding OneFileStyle}" />
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Files Preview">
@@ -104,15 +146,38 @@
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button
+                            Width="85"
+                            Height="25"
+                            Margin="10"
+                            Click="Ok_Click"
+                            Content="Ok"
+                            IsDefault="True"
+                            IsEnabled="{Binding IsFormValid}" />
+                        <Button
+                            Width="85"
+                            Height="25"
+                            Margin="10"
+                            Click="Cancel_Click"
+                            Content="Cancel"
+                            IsCancel="True" />
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="内容设置">
                 <StackPanel>
                     <GroupBox Header="Add Imports">
-                        <TextBox Width="300" Height="100" />
+                        <TextBox
+                            Width="300"
+                            Height="100"
+                            Text="{Binding UsingItems}" />
                     </GroupBox>
                     <GroupBox Header="Add constructor paramaters">
-                        <TextBox Width="300" Height="100" />
+                        <TextBox
+                            Width="300"
+                            Height="100"
+                            Text="{Binding ConstructorItems}" />
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
