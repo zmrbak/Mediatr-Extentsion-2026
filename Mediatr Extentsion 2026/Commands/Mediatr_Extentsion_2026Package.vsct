@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+
+  <Extern href="vsshlids.h"/>
+
+  <Commands package="guidMediatr_Extentsion_2026Package">
+    <Groups>
+      <Group guid="guidMediatr_Extentsion_2026PackageCmdSet" id="MyMenuGroup" priority="0x0000">
+				<Parent guid="guidSHLMainMenu" id="IDM_VS_CSCD_PROJECT_ADD"/>
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidMediatr_Extentsion_2026PackageCmdSet" id="AddMediatRItemCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidMediatr_Extentsion_2026PackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Create MediatR Files...</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources/Mediatr_16x16.png" usedList="bmpPic1"/>
+	</Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidMediatr_Extentsion_2026Package" value="{9c38a80b-0393-4d36-9d9c-ddb83b52f4ee}" />
+
+    <GuidSymbol name="guidMediatr_Extentsion_2026PackageCmdSet" value="{0275377e-db6f-4b7f-83d8-089572a36488}">
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="AddMediatRItemCommandId" value="0x0100" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{4d598310-e0d6-4684-9ff6-c99c6a6e4d3a}" >
+		<IDSymbol name="bmpPic1" value="1" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
